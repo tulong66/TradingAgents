@@ -1,8 +1,18 @@
 # TradingAgents Overview
 
+## ⚠️ IMPORTANT: What TradingAgents Is and Isn't
+
+**TradingAgents is a DECISION SUPPORT SYSTEM, not an automated trading platform.**
+
+- ✅ **Provides**: Intelligent analysis, investment recommendations, risk assessment
+- ❌ **Does NOT provide**: Actual trade execution, broker integration, or fund management
+- 🎯 **Purpose**: Enhance human investment decisions, not replace human judgment
+
+👉 **For complete details, see [System Capabilities & Limitations](system-capabilities.md)**
+
 ## 🎯 What is TradingAgents?
 
-TradingAgents is a cutting-edge **Multi-Agents LLM Financial Trading Framework** that revolutionizes investment decision-making through collaborative AI agents. It simulates a professional trading firm's decision-making process using specialized AI agents that work together to analyze markets and make informed trading decisions.
+TradingAgents is a cutting-edge **Multi-Agents LLM Financial Trading Framework** that revolutionizes investment decision-making through collaborative AI agents. It simulates a professional trading firm's decision-making process using specialized AI agents that work together to analyze markets and provide informed investment recommendations.
 
 ## 🌟 Key Features
 

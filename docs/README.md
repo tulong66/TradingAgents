@@ -6,6 +6,7 @@ Welcome to the TradingAgents documentation! This comprehensive guide covers ever
 
 ### 👥 User Documentation
 - **[Project Overview](user/overview.md)** - Understanding TradingAgents and its capabilities
+- **[System Capabilities & Limitations](user/system-capabilities.md)** - ⚠️ **IMPORTANT**: What TradingAgents does and doesn't do
 - **[Quick Start Guide](user/quick-start.md)** - Get up and running in minutes
 - **[User Guide](user/user-guide.md)** - Comprehensive usage instructions
 - **[Configuration](user/configuration.md)** - Detailed configuration options
@@ -42,9 +43,10 @@ graph TD
 ## 📖 Getting Started
 
 1. **New to TradingAgents?** Start with the [Project Overview](user/overview.md)
-2. **Want to try it quickly?** Jump to [Quick Start Guide](user/quick-start.md)
-3. **Planning to develop?** Check [Development Guide](developer/development-guide.md)
-4. **Understanding the design?** Read [Design Philosophy](design/design-philosophy.md)
+2. **⚠️ IMPORTANT:** Read [System Capabilities & Limitations](user/system-capabilities.md) to understand what TradingAgents does and doesn't do
+3. **Want to try it quickly?** Jump to [Quick Start Guide](user/quick-start.md)
+4. **Planning to develop?** Check [Development Guide](developer/development-guide.md)
+5. **Understanding the design?** Read [Design Philosophy](design/design-philosophy.md)
 
 ## 🔗 External Resources
 
