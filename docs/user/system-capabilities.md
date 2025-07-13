@@ -6,6 +6,31 @@ This document clarifies the exact capabilities and limitations of TradingAgents 
 
 ## ✅ What TradingAgents PROVIDES
 
+### 🎯 Single-Stock Deep Analysis System
+**IMPORTANT**: TradingAgents analyzes **one specific stock at a time** that YOU provide. It does not scan markets or automatically select stocks.
+
+```mermaid
+graph LR
+    A[User Input Required] --> B[Stock Ticker]
+    A --> C[Analysis Date]
+    
+    B --> B1["AAPL"]
+    B --> B2["TSLA"] 
+    B --> B3["NVDA"]
+    
+    C --> C1["2024-01-15"]
+    
+    B1 --> D[Single Stock Deep Analysis]
+    B2 --> D
+    B3 --> D
+    C1 --> D
+```
+
+**Input Requirements**:
+- ✅ **Stock Ticker**: You must provide specific stock symbol (e.g., "AAPL", "TSLA")
+- ✅ **Analysis Date**: Specific date for analysis (YYYY-MM-DD format)
+- ❌ **No Market Scanning**: System cannot find stocks for you
+
 ### 🧠 Intelligent Analysis Framework
 TradingAgents is a **decision support system** that provides comprehensive investment analysis through AI-powered agents:
 
@@ -57,6 +82,45 @@ graph TB
 
 ## ❌ What TradingAgents DOES NOT PROVIDE
 
+### 🚫 No Stock Selection or Market Scanning
+
+**IMPORTANT**: TradingAgents does **NOT** help you find or select stocks. It only analyzes stocks YOU specify.
+
+```mermaid
+graph TB
+    subgraph "❌ NOT PROVIDED"
+        A[Market Scanning]
+        B[Stock Selection]
+        C[Screening Tools]
+        D[Multi-Stock Comparison]
+    end
+    
+    A --> A1[❌ Cannot scan entire market]
+    A --> A2[❌ Cannot find opportunities]
+    
+    B --> B1[❌ Cannot recommend which stocks to buy]
+    B --> B2[❌ Cannot filter stocks by criteria]
+    
+    C --> C1[❌ No P/E ratio screening]
+    C --> C2[❌ No technical pattern screening]
+    
+    D --> D1[❌ Cannot compare multiple stocks]
+    D --> D2[❌ Cannot rank stocks]
+    
+    style A fill:#ffebee
+    style B fill:#ffebee
+    style C fill:#ffebee
+    style D fill:#ffebee
+```
+
+#### Stock Selection Limitations:
+- ❌ **No Market Scanning**: Cannot search the entire market for opportunities
+- ❌ **No Stock Screening**: Cannot filter stocks by P/E ratio, market cap, etc.
+- ❌ **No Automatic Selection**: Cannot recommend which stocks to analyze
+- ❌ **No Sector Analysis**: Cannot analyze entire industries or sectors
+- ❌ **No Relative Comparison**: Cannot compare multiple stocks simultaneously
+- ❌ **No Ranking System**: Cannot rank stocks from best to worst
+
 ### 🚫 No Actual Trading Execution
 
 **IMPORTANT**: TradingAgents is **NOT** an automated trading system and does **NOT**:
@@ -104,35 +168,112 @@ graph TB
 - ❌ **Tax advice** or reporting
 - ❌ **Regulatory compliance** handling
 
-## 🔄 Typical User Workflow
+## 🔄 Complete User Workflow
+
+### Step-by-Step Process
 
 ```mermaid
 sequenceDiagram
     participant U as User
+    participant SS as Stock Screener
     participant TA as TradingAgents
     participant DS as Data Sources
     participant B as Broker Platform
-    participant P as Portfolio
     
-    Note over U,P: Analysis Phase
-    U->>TA: Request analysis for AAPL
-    TA->>DS: Fetch market data
-    DS-->>TA: Return comprehensive data
-    TA->>TA: Multi-agent analysis
-    TA-->>U: Provide BUY recommendation + detailed report
+    Note over U,B: Phase 1: Stock Selection (User's Responsibility)
+    U->>SS: Use external tools to find stocks
+    SS-->>U: Return candidate stocks
+    U->>U: Create watchlist (e.g., AAPL, TSLA, NVDA)
     
-    Note over U,P: Human Decision Phase
-    U->>U: Review analysis and reasoning
+    Note over U,B: Phase 2: Deep Analysis (TradingAgents)
+    loop For each stock in watchlist
+        U->>TA: Request analysis for specific ticker + date
+        TA->>DS: Fetch comprehensive data for that stock
+        DS-->>TA: Return stock-specific data
+        TA->>TA: Multi-agent deep analysis
+        TA-->>U: Provide BUY/HOLD/SELL + detailed report
+    end
+    
+    Note over U,B: Phase 3: Decision & Execution (User's Responsibility)
+    U->>U: Compare analysis results
     U->>U: Make final investment decision
+    U->>B: Manually execute trades
+    B-->>U: Confirm trade execution
     
-    Note over U,P: Manual Execution Phase
-    U->>B: Manually place trade order
-    B-->>U: Execute trade and confirm
-    U->>P: Update personal portfolio records
-    
-    Note over U,P: Learning Phase (Optional)
-    U->>TA: Provide trade outcome for learning
+    Note over U,B: Phase 4: Learning (Optional)
+    U->>TA: Provide trade outcomes for learning
     TA->>TA: Update memory system
+```
+
+### Detailed Workflow Steps
+
+#### 🔍 **Phase 1: Stock Selection (You Must Do This)**
+TradingAgents cannot help with this phase. You need to:
+
+```mermaid
+graph TB
+    A[Stock Selection Tools] --> B[Finviz Screener]
+    A --> C[Yahoo Finance Screener]
+    A --> D[Broker Platform Tools]
+    A --> E[Financial News]
+    A --> F[Analyst Recommendations]
+    
+    B --> G[Create Watchlist]
+    C --> G
+    D --> G
+    E --> G
+    F --> G
+    
+    G --> H[AAPL, TSLA, NVDA, GOOGL...]
+```
+
+**Recommended Tools for Stock Selection**:
+- **Finviz**: Advanced stock screener with technical and fundamental filters
+- **Yahoo Finance Screener**: Free basic screening tools
+- **Broker Platforms**: Most brokers offer screening tools
+- **Financial News**: CNBC, Bloomberg, MarketWatch for ideas
+- **Analyst Reports**: Professional research recommendations
+
+**Example Selection Criteria**:
+```
+✅ Market cap > $1B
+✅ P/E ratio < 25
+✅ Revenue growth > 10%
+✅ Strong technical momentum
+✅ Positive analyst sentiment
+```
+
+#### 🧠 **Phase 2: Deep Analysis (TradingAgents)**
+For each stock in your watchlist:
+
+```python
+# Example: Analyze your pre-selected stocks
+watchlist = ["AAPL", "TSLA", "NVDA", "GOOGL"]
+analysis_date = "2024-01-15"
+results = {}
+
+for ticker in watchlist:
+    print(f"Analyzing {ticker}...")
+    final_state, decision = ta.propagate(ticker, analysis_date)
+    results[ticker] = {
+        "decision": decision,
+        "analysis": final_state["final_trade_decision"],
+        "confidence": final_state.get("confidence_score", "N/A")
+    }
+
+# Review results
+for ticker, result in results.items():
+    print(f"{ticker}: {result['decision']}")
+```
+
+#### 🎯 **Phase 3: Decision Making (Your Responsibility)**
+```mermaid
+graph TB
+    A[TradingAgents Results] --> B[Compare Recommendations]
+    B --> C[Consider Your Risk Tolerance]
+    C --> D[Check Portfolio Allocation]
+    D --> E[Make Final Decision]
+    E --> F[Execute Trades Manually]
 ```
 
 ## 🎯 System Positioning
@@ -270,39 +411,155 @@ graph TB
 
 ## 🎯 Best Practices for Users
 
-### How to Use TradingAgents Effectively
+### Complete Investment Process with TradingAgents
 
-1. **Analysis Review**
-   ```
-   ✅ Read the complete analysis report
-   ✅ Understand the reasoning behind recommendations
-   ✅ Consider multiple agent perspectives
-   ✅ Evaluate risk assessments carefully
-   ```
+#### 1. **Stock Selection Phase (Before Using TradingAgents)**
+```
+✅ Use external screeners to find candidate stocks
+✅ Create a focused watchlist (5-20 stocks max)
+✅ Consider your investment strategy and goals
+✅ Research basic company information
+✅ Check recent news and events
+```
 
-2. **Decision Making**
-   ```
-   ✅ Combine TradingAgents analysis with your own research
-   ✅ Consider your personal risk tolerance
-   ✅ Evaluate position sizing recommendations
-   ✅ Plan entry and exit strategies
-   ```
+**Recommended Workflow**:
+```python
+# Step 1: Create your watchlist using external tools
+watchlist = [
+    "AAPL",  # From tech sector screening
+    "TSLA",  # From growth stock screening  
+    "JNJ",   # From dividend screening
+    "NVDA",  # From AI/semiconductor theme
+]
 
-3. **Execution**
-   ```
-   ✅ Use your preferred broker platform
-   ✅ Double-check all order details
-   ✅ Implement appropriate risk management
-   ✅ Monitor positions actively
-   ```
+# Step 2: Prioritize based on your criteria
+priority_stocks = ["AAPL", "NVDA"]  # Focus on top picks first
+```
 
-4. **Learning**
-   ```
-   ✅ Track your trading outcomes
-   ✅ Provide feedback to TradingAgents for learning
-   ✅ Analyze what worked and what didn't
-   ✅ Continuously improve your process
-   ```
+#### 2. **Analysis Phase (Using TradingAgents)**
+```
+✅ Analyze one stock at a time for deep insights
+✅ Use consistent analysis dates for comparison
+✅ Read the complete analysis report
+✅ Understand the reasoning behind recommendations
+✅ Pay attention to risk assessments
+```
+
+**Efficient Analysis Workflow**:
+```python
+# Analyze your watchlist systematically
+analysis_date = "2024-01-15"
+results = {}
+
+for ticker in priority_stocks:
+    print(f"\n=== Analyzing {ticker} ===")
+    final_state, decision = ta.propagate(ticker, analysis_date)
+    
+    # Extract key information
+    results[ticker] = {
+        "decision": decision,
+        "reasoning": final_state["final_trade_decision"],
+        "market_analysis": final_state["market_report"],
+        "risk_assessment": final_state["risk_debate_state"]["judge_decision"]
+    }
+    
+    print(f"{ticker} Recommendation: {decision}")
+
+# Compare results
+print("\n=== Summary ===")
+for ticker, result in results.items():
+    print(f"{ticker}: {result['decision']}")
+```
+
+#### 3. **Decision Making Phase**
+```
+✅ Compare TradingAgents analysis with your own research
+✅ Consider your personal risk tolerance
+✅ Evaluate position sizing recommendations
+✅ Check portfolio allocation and diversification
+✅ Plan entry and exit strategies
+✅ Set stop-loss and take-profit levels
+```
+
+#### 4. **Execution Phase**
+```
+✅ Use your preferred broker platform
+✅ Double-check all order details
+✅ Implement appropriate risk management
+✅ Start with smaller position sizes
+✅ Monitor positions actively
+```
+
+#### 5. **Learning Phase**
+```
+✅ Track your trading outcomes
+✅ Provide feedback to TradingAgents for learning
+✅ Analyze what worked and what didn't
+✅ Continuously improve your process
+✅ Update your stock selection criteria
+```
+
+### Common Usage Patterns
+
+#### Pattern 1: Weekly Watchlist Review
+```python
+# Every Sunday, analyze your watchlist
+watchlist = ["AAPL", "GOOGL", "MSFT", "TSLA"]
+current_date = "2024-01-15"
+
+weekly_analysis = {}
+for ticker in watchlist:
+    _, decision = ta.propagate(ticker, current_date)
+    weekly_analysis[ticker] = decision
+
+# Track changes from previous week
+print("Weekly Analysis Summary:")
+for ticker, decision in weekly_analysis.items():
+    print(f"{ticker}: {decision}")
+```
+
+#### Pattern 2: Event-Driven Analysis
+```python
+# Analyze stocks around earnings or major events
+earnings_stocks = ["AAPL", "TSLA"]  # Companies reporting earnings
+event_date = "2024-01-15"  # Day before earnings
+
+for ticker in earnings_stocks:
+    print(f"\nPre-earnings analysis for {ticker}")
+    final_state, decision = ta.propagate(ticker, event_date)
+    
+    # Focus on risk assessment before events
+    risk_analysis = final_state["risk_debate_state"]["judge_decision"]
+    print(f"Risk Assessment: {risk_analysis}")
+```
+
+#### Pattern 3: Sector Rotation Analysis
+```python
+# Compare stocks from different sectors
+tech_stocks = ["AAPL", "GOOGL", "MSFT"]
+healthcare_stocks = ["JNJ", "PFE", "UNH"]
+finance_stocks = ["JPM", "BAC", "WFC"]
+
+sectors = {
+    "Technology": tech_stocks,
+    "Healthcare": healthcare_stocks,
+    "Finance": finance_stocks
+}
+
+analysis_date = "2024-01-15"
+sector_results = {}
+
+for sector, stocks in sectors.items():
+    sector_results[sector] = {}
+    for ticker in stocks:
+        _, decision = ta.propagate(ticker, analysis_date)
+        sector_results[sector][ticker] = decision
+
+# Compare sector performance
+for sector, results in sector_results.items():
+    buy_count = sum(1 for decision in results.values() if decision == "BUY")
+    print(f"{sector}: {buy_count}/{len(results)} BUY recommendations")
+```
 
 ## 🔮 Future Capabilities
 
