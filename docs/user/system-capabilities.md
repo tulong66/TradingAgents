@@ -561,15 +561,236 @@ for sector, results in sector_results.items():
     print(f"{sector}: {buy_count}/{len(results)} BUY recommendations")
 ```
 
+## 🌍 Market Applicability: Stocks vs Forex vs Other Assets
+
+### 🎯 **Designed for Stock Markets**
+
+TradingAgents is **specifically designed for equity (stock) analysis** and is **NOT suitable for forex trading** in its current form.
+
+```mermaid
+graph TB
+    subgraph "✅ SUITABLE MARKETS"
+        A[US Stocks]
+        B[International Stocks]
+        C[ETFs]
+        D[REITs]
+    end
+    
+    subgraph "❌ NOT SUITABLE MARKETS"
+        E[Forex/Currency Pairs]
+        F[Cryptocurrencies]
+        G[Commodities]
+        H[Bonds]
+    end
+    
+    A --> I[Full Analysis Available]
+    B --> I
+    C --> I
+    D --> I
+    
+    E --> J[Major Limitations]
+    F --> J
+    G --> J
+    H --> J
+    
+    style E fill:#ffebee
+    style F fill:#ffebee
+    style G fill:#ffebee
+    style H fill:#ffebee
+```
+
+### ❌ **Why TradingAgents is NOT Suitable for Forex Trading**
+
+#### 1. **Missing Critical Forex Data Sources**
+```mermaid
+graph LR
+    subgraph "❌ Stock Data (Not Relevant for Forex)"
+        A[Company Financial Statements]
+        B[Insider Trading Data]
+        C[Corporate News]
+        D[Earnings Reports]
+    end
+    
+    subgraph "✅ Forex Needs (Not Available)"
+        E[Central Bank Policies]
+        F[Economic Indicators]
+        G[Interest Rate Decisions]
+        H[Political Events]
+        I[Commodity Prices]
+    end
+    
+    style A fill:#ffebee
+    style B fill:#ffebee
+    style C fill:#ffebee
+    style D fill:#ffebee
+```
+
+**Forex markets require data that TradingAgents doesn't have**:
+- ❌ **Central Bank Policies**: Interest rate decisions, monetary policy statements
+- ❌ **Economic Indicators**: GDP, CPI, employment data, PMI
+- ❌ **Political Events**: Elections, policy changes, geopolitical tensions
+- ❌ **Commodity Correlations**: Oil, gold prices affecting currencies
+- ❌ **Capital Flows**: International money movement data
+
+#### 2. **Wrong Analysis Framework**
+```mermaid
+graph TB
+    subgraph "Stock Analysis Framework (Current)"
+        A[Company Fundamentals]
+        B[Industry Analysis]
+        C[Financial Health]
+        D[Management Quality]
+        E[Competitive Position]
+    end
+    
+    subgraph "Forex Analysis Framework (Needed)"
+        F[Macroeconomic Analysis]
+        G[Monetary Policy]
+        H[International Trade]
+        I[Political Stability]
+        J[Currency Correlations]
+    end
+    
+    style A fill:#ffebee
+    style B fill:#ffebee
+    style C fill:#ffebee
+    style D fill:#ffebee
+    style E fill:#ffebee
+```
+
+#### 3. **Inappropriate Agent Roles**
+Current agents are designed for stock analysis:
+
+| Current Agent | Stock Focus | Forex Limitation |
+|---------------|-------------|------------------|
+| **Fundamentals Analyst** | Company financial statements | ❌ No company in forex pairs |
+| **Social Media Analyst** | Stock discussions on Reddit | ❌ Different forex discussion patterns |
+| **News Analyst** | Company-specific news | ❌ Needs macroeconomic news |
+| **Market Analyst** | Stock technical indicators | ⚠️ Limited - only technical analysis works |
+
+### ⚠️ **Limited Technical Analysis Capability**
+
+**What MIGHT work for forex**:
+```python
+# Technical indicators could theoretically work
+ta.propagate("EURUSD=X", "2024-01-15")  # EUR/USD analysis
+ta.propagate("GBPUSD=X", "2024-01-15")  # GBP/USD analysis
+
+# Might provide:
+# ✅ RSI, MACD, Bollinger Bands
+# ✅ Moving averages
+# ✅ Support/resistance levels
+```
+
+**What WON'T work for forex**:
+```python
+final_state["fundamentals_report"]  # ❌ No fundamental data
+final_state["sentiment_report"]     # ❌ Wrong sentiment sources
+final_state["news_report"]          # ❌ Company news irrelevant
+```
+
+### 🔧 **What Would Be Needed for Forex Support**
+
+#### Required Data Sources
+```python
+forex_data_sources = {
+    "economic_calendar": "Major economic events and releases",
+    "central_banks": "Fed, ECB, BOJ, BOE policy decisions",
+    "macro_indicators": "GDP, inflation, employment data",
+    "political_events": "Elections, policy changes",
+    "commodity_prices": "Oil, gold affecting currencies",
+    "capital_flows": "International money movements"
+}
+```
+
+#### Required Agent Redesign
+```python
+forex_agents = [
+    "macro_economist",        # GDP, inflation, employment analysis
+    "central_bank_analyst",   # Monetary policy interpretation
+    "geopolitical_analyst",   # Political events and stability
+    "commodity_analyst",      # Oil, gold correlation analysis
+    "flow_analyst",          # Capital flow and sentiment
+    "technical_analyst"       # Price action and indicators
+]
+```
+
+#### Required Analysis Framework
+```mermaid
+graph TB
+    A[Forex Analysis Framework] --> B[Macroeconomic Fundamentals]
+    A --> C[Monetary Policy Divergence]
+    A --> D[Political Risk Assessment]
+    A --> E[Commodity Correlations]
+    A --> F[Technical Analysis]
+    
+    B --> G[GDP Growth Differential]
+    C --> H[Interest Rate Differential]
+    D --> I[Political Stability Index]
+    E --> J[Oil/Gold Impact]
+    F --> K[Price Action Patterns]
+```
+
+### 🎯 **Recommended Alternatives for Forex Trading**
+
+If you're interested in forex analysis, consider these specialized tools:
+
+#### Forex-Specific Platforms
+- **MetaTrader 4/5**: Built-in forex analysis tools
+- **TradingView**: Forex charts and community analysis
+- **Forex.com**: Comprehensive forex research
+- **DailyFX**: Economic calendar and forex analysis
+- **Investing.com**: Economic indicators and news
+
+#### Economic Data Sources
+- **Federal Reserve Economic Data (FRED)**: US economic indicators
+- **European Central Bank**: Eurozone data
+- **Bank of Japan**: Japanese economic data
+- **Economic Calendar Websites**: ForexFactory, Investing.com
+
+### 📊 **Other Asset Classes**
+
+#### ⚠️ **Limited Applicability**
+```mermaid
+graph TB
+    A[TradingAgents Suitability] --> B[✅ Highly Suitable]
+    A --> C[⚠️ Partially Suitable]
+    A --> D[❌ Not Suitable]
+    
+    B --> E[Individual Stocks]
+    B --> F[Stock ETFs]
+    B --> G[REITs]
+    
+    C --> H[Commodity ETFs]
+    C --> I[Bond ETFs]
+    
+    D --> J[Forex Pairs]
+    D --> K[Cryptocurrencies]
+    D --> L[Individual Bonds]
+    D --> M[Futures Contracts]
+```
+
+**Explanation**:
+- **✅ Highly Suitable**: Full fundamental + technical analysis available
+- **⚠️ Partially Suitable**: Technical analysis works, limited fundamental data
+- **❌ Not Suitable**: Wrong data sources and analysis framework
+
 ## 🔮 Future Capabilities
 
-While TradingAgents currently focuses on analysis and recommendations, potential future enhancements might include:
+While TradingAgents currently focuses on stock analysis and recommendations, potential future enhancements might include:
 
+### Stock Market Enhancements
 - **Paper Trading**: Simulated trading for strategy testing
 - **Broker Integration**: Read-only account monitoring (no execution)
 - **Portfolio Analytics**: Performance tracking and analysis
 - **Alert Systems**: Notification of significant market events
 - **Strategy Backtesting**: Historical performance evaluation
+
+### Potential Market Expansion
+- **Forex Module**: Dedicated forex analysis with appropriate data sources
+- **Crypto Analysis**: Cryptocurrency-specific fundamental analysis
+- **Commodity Analysis**: Supply/demand fundamentals for commodities
+- **Bond Analysis**: Interest rate and credit analysis
 
 **Note**: Any future trading-related features would maintain the human-in-the-loop principle and require explicit user authorization.
 
