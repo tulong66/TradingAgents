@@ -14,6 +14,8 @@ Welcome to the TradingAgents documentation! This comprehensive guide covers ever
 ### 🎨 Design Documentation
 - **[Design Philosophy](design/design-philosophy.md)** - Core principles and design thinking
 - **[System Architecture](design/architecture.md)** - Technical architecture overview
+- **[Multi-Agent Architecture](design/multi-agent-architecture.md)** - 🔥 **Core Innovation**: Multi-agent collaboration framework
+- **[Cross-Industry Patterns](design/multi-agent-patterns.md)** - 🌐 **Reusable Patterns**: Abstractable collaboration patterns
 - **[Workflow Design](design/workflow-design.md)** - Multi-agent workflow explanation
 - **[Decision Framework](design/decision-making-framework.md)** - How decisions are made
 
